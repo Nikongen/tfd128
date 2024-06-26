@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tfd128"
+version = "0.0.1"
+authors = [
+  { name="Nikolas Longen", email="nikolaslongen@gmail.com" },
+]
+description = "A small to read out tfd128 sensor boards"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+  "pyserial",
+
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3.0",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/Nikongen/tfd128"
+Issues = "https://github.com/Nikongen/tfd128/issues"
