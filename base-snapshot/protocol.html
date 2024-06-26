@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Serial Protocol - Programming the TFD128</title>
+<meta charset="utf-8" />
+<meta name="description" content="Scripts for the TFD 128 - Skripte für den TFD 128" />
+<meta name="author" content="Andreas Engel" />
+<meta name="keywords" content="TFD128, TFD 128, Temperatur Feuchte
+Datenlogger, Temperatur Feuchtigkeits Datenlogger, electronic hygrometer" />
+<meta name="robots" content="index,follow" />
+<link href="css/tfd128.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="header">
+<h1>Programming the TFD 128</h1>
+</div>
+
+<div id="navigation">
+   <h3>Internal Links</h3>
+   <ul><li class="webgen-menu-level1"><a href="index.html" hreflang="en">Main Page</a></li><li class="webgen-menu-level1"><a href="manual.html" hreflang="en">Quick Start</a></li><li class="webgen-menu-level1"><a href="changelog.html" hreflang="en">ChangeLog</a></li><li class="webgen-menu-level1"><a href="history.html" hreflang="en">Site History</a></li><li class="webgen-menu-level1 active"><a href="protocol.html" hreflang="en">Serial Protocol</a></li></ul>
+   <h3>Downloads</h3>
+   <ul>
+      <li><a href="downloads/tfd128-2.1.5.tar.gz">tfd128-2.1.5.tar.gz</a></li>
+   </ul>
+
+   <h3>External Links</h3>
+   <ul>
+   	  <!--
+      <li><a href="http://www.inprime.net/subpages/tfd-128.html">Lars Nordgren&#x2019;s docs</a></li>
+	  -->
+      <li><a href="http://vd-software.inside1.net/TFD128">Vincenz Dreger&#x2019;s Software</a></li>
+   </ul>
+
+   <h3>Contact</h3>
+   <ul>
+      <li><a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x41;&#x6e;&#x64;&#x72;&#x65;&#x61;&#x73;%20&#x45;&#x6e;&#x67;&#x65;&#x6c;%20%3c&#x70;&#x72;&#x6f;&#x6a;&#x65;&#x63;&#x74;&#x73;&#x40;&#x6e;&#x65;&#x73;&#x72;&#x61;&#x64;&#x61;&#x2e;&#x64;&#x65;%3e">E-Mail</a></li>
+   </ul>
+
+</div>
+
+<div id="content">
+   <h2 id="protocol">Protocol</h2>
+
+<p><strong>Caveat:</strong> please note that there seems to be no official documentation about
+the used protocol. The only valuable source of help was ELV’s documentation of
+the ULA 200 (an USB-to-LCD converter), which uses the same protocol principle.
+Everything described below is just the result of snooping the USB bus and
+analyzing the data when controlling the logger via the Windows software. So,
+the information here might be (partially) wrong and/or incomplete. And, of
+course, it’s always possible that the manufacturer might have incompatibly
+changed the logger’s firmware meanwhile. Use at your own risk.</p>
+
+<p>The serial interface parameters are 38400,E,1. The protocol is relatively
+simple: the PC sends a command sequence to the logger and the logger answers
+with an appropriate message. All data transfers are in binary format.</p>
+
+<p>The following ASCII control codes are used in data transfers:</p>
+
+<table class="normal">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Hex-Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>STX</code></td>
+      <td>0x02</td>
+    </tr>
+    <tr>
+      <td><code>ETX</code></td>
+      <td>0x03</td>
+    </tr>
+    <tr>
+      <td><code>ENQ</code></td>
+      <td>0x05</td>
+    </tr>
+    <tr>
+      <td><code>ACK</code></td>
+      <td>0x06</td>
+    </tr>
+    <tr>
+      <td><code>NAK</code></td>
+      <td>0x15</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>All commands are of the form</p>
+
+<pre><code>&lt;STX&gt; &lt;cmd&gt; &lt;parameters&gt; &lt;ETX&gt;
+</code></pre>
+
+<p>and will be answered with the sequence:</p>
+
+<pre><code>&lt;STX&gt; &lt;cmd&gt; &lt;response&gt; &lt;ETX&gt;
+</code></pre>
+
+<p>Since all data transfers are done in binary format, the following translation
+of the characters in <code>&lt;parameters&gt;</code> and <code>&lt;response&gt;</code> has to be done: if any of
+the characters <code>&lt;STX&gt;</code>, <code>&lt;ETX&gt;</code> or <code>&lt;ENQ&gt;</code> is to be transmitted, this character
+must be replaced with the two character sequence <code>&lt;ENQ&gt;</code> <code>&lt;c+0x80&gt;</code>.
+Consequently, the receiving side has to translate this two character sequence
+back into the original character.</p>
+
+<h3 id="known-command-sequences">Known command sequences</h3>
+
+<p>If the logger is busy, or there is an error in the command sequence (though
+some errors will simply be ignored), the <code>&lt;response&gt;</code> field of the answer is
+always <code>&lt;NAK&gt;</code>. So, in the following description, only the answers in case
+of success are given.</p>
+
+<p>The date sequence used in the communication is a sequence of seven bytes in
+the following format:</p>
+
+<pre><code>yearlo yearhi month day hours minutes seconds
+</code></pre>
+
+<p>The year is to be interpreted as a 16bit number (LSB first); month ranges from
+0 (January) to 11 (December); the other bytes are to be interpreted as expected.</p>
+
+<p>Note that this interpreting is just done by the controlling software on the PC.
+The logger itself does not do anything with the date, but just stores it in the
+eeprom and sends it back later. So, theoretically, we could send any seven byte
+sequence to the device here as long as we don’t use the original windows
+software for controlling the device.</p>
+
+<hr />
+
+<table class="cmd"><tr><th>Command:</th><td>V</td></tr><tr><th>Parameters:</th><td>none</td></tr><tr><th>Response:</th><td>lo hi</td></tr><tr><th>Description:</th><td>Get version number. To be interpreted as a 16bit number (LSB
+first). The original windows software seems to be using this command
+to periodically check whether the logger is currently active or
+not.</td></tr></table>
+<hr />
+
+<table class="cmd"><tr><th>Command:</th><td>A</td></tr><tr><th>Parameters:</th><td>none</td></tr><tr><th>Response:</th><td>lo hi</td></tr><tr><th>Description:</th><td>Get number of stored data points. To be interpreted as a 16bit number
+(LSB first).</td></tr></table>
+<hr />
+
+<table class="cmd"><tr><th>Command:</th><td>S</td></tr><tr><th>Parameters:</th><td>starttime mode interval</td></tr><tr><th>Response:</th><td>&lt;ACK&gt;</td></tr><tr><th>Description:</th><td>Start logging. <code>starttime</code> is a date sequence as described
+above; <code>mode</code> is 2 for temperature only and 3 for
+temperature plus humidity; <code>interval</code> is either 1 or 5.</td></tr></table>
+<hr />
+
+<table class="cmd"><tr><th>Command:</th><td>E</td></tr><tr><th>Parameters:</th><td>stoptime</td></tr><tr><th>Response:</th><td>&lt;ACK&gt;</td></tr><tr><th>Description:</th><td>Stop logging. <code>stoptime</code> is a date sequence as described
+above.</td></tr></table>
+<hr />
+
+<table class="cmd"><tr><th>Command:</th><td>Z</td></tr><tr><th>Parameters:</th><td>none</td></tr><tr><th>Response:</th><td>starttime mode interval stoptime</td></tr><tr><th>Description:</th><td>Get starttime, endtime, mode and interval. See <code>S</code> and
+<code>E</code> commands for the meaning of the response.</td></tr></table>
+<hr />
+
+<table class="cmd"><tr><th>Command:</th><td>R</td></tr><tr><th>Parameters:</th><td>none</td></tr><tr><th>Response:</th><td>tlo thi hum ...<br />tlo thi ...</td></tr><tr><th>Description:</th><td>Get first data record. Depending on the logging mode, either two or
+three bytes per data point will be sent. The temperature values are to
+be interpreted as 16bit values (LSB first) with 1/10&deg;C unit. The
+humidity value can be taken directly.<br />
+Note that since the USB protocol is block oriented, the data
+record may contain more data points than available. These excess
+points have to be ignored.</td></tr></table>
+<hr />
+
+<table class="cmd"><tr><th>Command:</th><td>N</td></tr><tr><th>Parameters:</th><td>none</td></tr><tr><th>Response:</th><td>tlo thi hum ...<br />tlo thi ...</td></tr><tr><th>Description:</th><td>Get next data record if there are more stored data points than can be
+retrieved by the <code>R</code> command. The same comment as for the
+<code>R</code> command applies.</td></tr></table>
+<hr />
+
+<table class="cmd"><tr><th>Command:</th><td>G</td></tr><tr><th>Parameters:</th><td>none</td></tr><tr><th>Response:</th><td>tlo thi hum ...<br />tlo thi ...</td></tr><tr><th>Description:</th><td>Unknown command. Response is the same as from the previous R or N
+command.</td></tr></table>
+<hr />
+
+
+</div>
+
+<div id="footer">
+Copyright &copy; 2007-2020 Andreas Engel - Last page change: 2020-03-21
+</div>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ChangeLog - Programming the TFD128</title>
+<meta charset="utf-8" />
+<meta name="description" content="Scripts for the TFD 128 - Skripte für den TFD 128" />
+<meta name="author" content="Andreas Engel" />
+<meta name="keywords" content="TFD128, TFD 128, Temperatur Feuchte
+Datenlogger, Temperatur Feuchtigkeits Datenlogger, electronic hygrometer" />
+<meta name="robots" content="index,follow" />
+<link href="css/tfd128.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="header">
+<h1>Programming the TFD 128</h1>
+</div>
+
+<div id="navigation">
+   <h3>Internal Links</h3>
+   <ul><li class="webgen-menu-level1"><a href="index.html" hreflang="en">Main Page</a></li><li class="webgen-menu-level1"><a href="manual.html" hreflang="en">Quick Start</a></li><li class="webgen-menu-level1 active"><a href="changelog.html" hreflang="en">ChangeLog</a></li><li class="webgen-menu-level1"><a href="history.html" hreflang="en">Site History</a></li><li class="webgen-menu-level1"><a href="protocol.html" hreflang="en">Serial Protocol</a></li></ul>
+   <h3>Downloads</h3>
+   <ul>
+      <li><a href="downloads/tfd128-2.1.5.tar.gz">tfd128-2.1.5.tar.gz</a></li>
+   </ul>
+
+   <h3>External Links</h3>
+   <ul>
+   	  <!--
+      <li><a href="http://www.inprime.net/subpages/tfd-128.html">Lars Nordgren&#x2019;s docs</a></li>
+	  -->
+      <li><a href="http://vd-software.inside1.net/TFD128">Vincenz Dreger&#x2019;s Software</a></li>
+   </ul>
+
+   <h3>Contact</h3>
+   <ul>
+      <li><a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x41;&#x6e;&#x64;&#x72;&#x65;&#x61;&#x73;%20&#x45;&#x6e;&#x67;&#x65;&#x6c;%20%3c&#x70;&#x72;&#x6f;&#x6a;&#x65;&#x63;&#x74;&#x73;&#x40;&#x6e;&#x65;&#x73;&#x72;&#x61;&#x64;&#x61;&#x2e;&#x64;&#x65;%3e">E-Mail</a></li>
+   </ul>
+
+</div>
+
+<div id="content">
+   
+<h2 id="changelog">Changelog</h2>
+
+<p>Hint: If you actually need an old revision, hover over the bullet
+in front of the desired release.</p>
+
+<h2 id="a-hrefdownloadstfd128-215targzbullnbsparelease-215-2020-03-21"><a href="downloads/tfd128-2.1.5.tar.gz">• </a>RELEASE-2.1.5 (2020-03-21)</h2>
+
+<ul>
+  <li>Fix: initial connection of the logger needs a delay.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-214targzbullnbsparelease-214-2014-05-03"><a href="downloads/tfd128-2.1.4.tar.gz">• </a>RELEASE-2.1.4 (2014-05-03)</h2>
+
+<ul>
+  <li>Fix: in python3, <code>--data-format</code> didn’t work as there strings
+have no <code>decode()</code> method.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-213targzbullnbsparelease-213-2014-04-12"><a href="downloads/tfd128-2.1.3.tar.gz">• </a>RELEASE-2.1.3 (2014-04-12)</h2>
+
+<ul>
+  <li>The previous python3 patch was incomplete. In addition, it made the script
+no longer work with python2.<br />
+Note to self: test before releasing software.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-212targzbullnbsparelease-212-2014-03-28"><a href="downloads/tfd128-2.1.2.tar.gz">• </a>RELEASE-2.1.2 (2014-03-28)</h2>
+
+<ul>
+  <li>Port to python3 [via patch from Thomas Kittel]</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-211targzbullnbsparelease-211-2011-01-08"><a href="downloads/tfd128-2.1.1.tar.gz">• </a>RELEASE-2.1.1 (2011-01-08)</h2>
+
+<ul>
+  <li>Fixed error code interpretation. In some circumstances (depending on
+the values to be read) data was incorrectly interpreted as an error.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-210targzbullnbsparelease-210-2010-02-26"><a href="downloads/tfd128-2.1.0.tar.gz">• </a>RELEASE-2.1.0 (2010-02-26)</h2>
+
+<ul>
+  <li>Fixed an undetected bug which prevented the logger from
+being found on Mac OS X.</li>
+  <li>Renamed <code>tfd128</code> to <code>tfd128_cli.py</code> there’s a <code>tfd128</code> shell script for
+backwards compatibility.</li>
+  <li>Potential incompatibility: renamed short option for <code>--debug</code> from <code>-d</code> to
+<code>-g</code>.</li>
+  <li>Added new commandline option <code>--device</code> (short: <code>-d</code>) so the user can
+specify the device to be used.</li>
+  <li>Potential incompatibility: the class <code>Tfd128</code> no longer tries to find the
+serial device itself.</li>
+  <li>Updated INSTALLATION notes for Ubuntu 9.04.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-204targzbullnbsparelease-204-2009-12-30"><a href="downloads/tfd128-2.0.4.tar.gz">• </a>RELEASE-2.0.4 (2009-12-30)</h2>
+
+<ul>
+  <li>Fixed uninitialized variable access. This bug should have been fixed in 2.0.3
+already.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-203targzbullnbsparelease-203-2008-03-01"><a href="downloads/tfd128-2.0.3.tar.gz">• </a>RELEASE-2.0.3 (2008-03-01)</h2>
+
+<ul>
+  <li>Fixed invalid variable access when the battery was drained or the eeprom was
+full.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-202targzbullnbsparelease-202-2008-02-22"><a href="downloads/tfd128-2.0.2.tar.gz">• </a>RELEASE-2.0.2 (2008-02-22)</h2>
+
+<ul>
+  <li>Fix: nothing was written, when <code>-o</code> was not specified.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-201targzbullnbsparelease-201-2008-02-21"><a href="downloads/tfd128-2.0.1.tar.gz">• </a>RELEASE-2.0.1 (2008-02-21)</h2>
+
+<ul>
+  <li>Fix: the default data format produced an additional column when only
+the temperature was recorded.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-200targzbullnbsparelease-200-2008-02-20"><a href="downloads/tfd128-2.0.0.tar.gz">• </a>RELEASE-2.0.0 (2008-02-20)</h2>
+
+<ul>
+  <li>Major code rewrite; note that the new implementation of the <code>Tfd128</code> class
+itself is incompatible with the 1.x releases, but should be easier to use
+now. Application and class have been split into separate files. The
+<code>tfd128.py</code> file now only contains the <code>Tfd128</code> class. The application part
+has been moved into <code>tfd128</code>.</li>
+  <li>The progress bar is now off by default when printing to stdout. Also, the
+heading line in the output data has been removed.</li>
+  <li>Both the date/time format and the output data format can be changed via the
+command line.</li>
+  <li>Both the standalone script and the class itself are now documented.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-121targzbullnbsparelease-121-2007-09-26"><a href="downloads/tfd128-1.2.1.tar.gz">• </a>RELEASE-1.2.1 (2007-09-26)</h2>
+
+<ul>
+  <li>Added missing newline in CSV file.</li>
+  <li>Fixed division by zero bug when there was only one measurement point.</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-120targzbullnbsparelease-120-2007-07-06"><a href="downloads/tfd128-1.2.0.tar.gz">• </a>RELEASE-1.2.0 (2007-07-06)</h2>
+
+<ul>
+  <li>Added <code>envcontrol.py</code> [Pascal Bihler]</li>
+  <li>Fixed and improved error handling.</li>
+  <li>Added command line options to suppress the progress bar and the
+header line when dumping the data values</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-110targzbullnbsparelease-110-2007-06-27"><a href="downloads/tfd128-1.1.0.tar.gz">• </a>RELEASE-1.1.0 (2007-06-27)</h2>
+
+<ul>
+  <li>Added license notes and <code>README</code>.</li>
+  <li>Added Mac OS X support [Pascal Bihler]</li>
+  <li>Use <code>sys.exit()</code> instead of <code>exit()</code> [Pascal Bihler]</li>
+</ul>
+
+<h2 id="a-hrefdownloadstfd128-100targzbullnbsparelease-100-2007-02-12"><a href="downloads/tfd128-1.0.0.tar.gz">• </a>RELEASE-1.0.0 (2007-02-12)</h2>
+
+<ul>
+  <li>First revision leaving my computer.</li>
+</ul>
+
+</div>
+
+<div id="footer">
+Copyright &copy; 2007-2020 Andreas Engel - Last page change: 2020-03-21
+</div>
+
+</body>
+</html>

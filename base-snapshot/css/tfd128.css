@@ -1,0 +1,132 @@
+body {
+	padding: 10px;
+	background: #f8f8ff;
+	color: #111133;
+	font: 10pt/14pt verdana, serif;
+}
+
+h1, h2, h3 {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #5e80bd;
+}
+
+h2 a {
+    text-decoration: none;
+    color: #5e80bd;
+}
+
+#header h1 {
+	margin-top: 0;
+	background: url(../img/tfd128.gif) no-repeat;
+	padding: 40px 0 46px 180px;
+}
+
+#content {
+	border-right: 1px solid #eeeeff;
+	padding-right: 1em;
+	margin: 0 13.5em 10px 0;
+	text-align: justify;
+	min-width: 17em;
+}
+
+#content h2 {
+	border-bottom: solid 3px;
+}
+
+#content h3 {
+	border-bottom: dotted 1px;
+}
+
+#navigation {
+	float: right;
+	width: 12.5em;
+	margin-left: 1em;
+}
+
+#navigation h3 {
+	padding: 0;
+	margin-top: 0;
+	background: #f8f8ff;
+	color: #5e80bd;
+	border-bottom: solid 3px;
+}
+
+#navigation ul {
+	padding: 0;
+	list-style: none;
+}
+
+#navigation li {
+	margin-bottom: 4px;
+	background: #eff3f9;
+	text-align: left;
+	font-family: Georgia, "Times New Roman", serif
+}
+
+#navigation li a {
+	display: block;
+	border-left: 0.5em solid #ddddff;
+	padding: 0.25em 0 0.25em 0.75em;
+	text-decoration: none;
+	color: #5e80bd;
+}
+
+#navigation li.active a {
+    border-left: 0.5em solid #5e80bd;
+}
+
+#navigation li a:hover {
+	border-left: 0.5em solid #5e80bd;
+	background: #ddddff;
+}
+
+#footer {
+	clear: both;
+	border-top: dotted 1px;
+	font-size: 8pt;
+	color: #9ec0fd;
+}
+
+pre {
+	font-family: serif;
+	background-color: #eeeeff;
+	padding: 0.5em;
+	border: dashed 1px #5e80bd;
+}
+
+table {
+	border: dashed 1px #5e80bd;
+}
+
+table.normal {
+	margin: 0 auto;
+	text-align: center;
+}
+
+table.normal tr {
+	background-color: #eeeeff;
+}
+
+table.cmd {
+	text-align: left;
+	margin-bottom: 1em;
+	width : 100%;
+}
+
+table.cmd tr {
+	vertical-align: text-top;
+	background-color: #eeeeff;
+}
+table.cmd th {
+	width: 8em;
+}
+
+img {
+	border: 0;
+}
+
+hr {
+	display: none;
+	border: 0;
+	width: 80%;
+}

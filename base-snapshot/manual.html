@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quick Start - Programming the TFD128</title>
+<meta charset="utf-8" />
+<meta name="description" content="Scripts for the TFD 128 - Skripte für den TFD 128" />
+<meta name="author" content="Andreas Engel" />
+<meta name="keywords" content="TFD128, TFD 128, Temperatur Feuchte
+Datenlogger, Temperatur Feuchtigkeits Datenlogger, electronic hygrometer" />
+<meta name="robots" content="index,follow" />
+<link href="css/tfd128.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="header">
+<h1>Programming the TFD 128</h1>
+</div>
+
+<div id="navigation">
+   <h3>Internal Links</h3>
+   <ul><li class="webgen-menu-level1"><a href="index.html" hreflang="en">Main Page</a></li><li class="webgen-menu-level1 active"><a href="manual.html" hreflang="en">Quick Start</a></li><li class="webgen-menu-level1"><a href="changelog.html" hreflang="en">ChangeLog</a></li><li class="webgen-menu-level1"><a href="history.html" hreflang="en">Site History</a></li><li class="webgen-menu-level1"><a href="protocol.html" hreflang="en">Serial Protocol</a></li></ul>
+   <h3>Downloads</h3>
+   <ul>
+      <li><a href="downloads/tfd128-2.1.5.tar.gz">tfd128-2.1.5.tar.gz</a></li>
+   </ul>
+
+   <h3>External Links</h3>
+   <ul>
+   	  <!--
+      <li><a href="http://www.inprime.net/subpages/tfd-128.html">Lars Nordgren&#x2019;s docs</a></li>
+	  -->
+      <li><a href="http://vd-software.inside1.net/TFD128">Vincenz Dreger&#x2019;s Software</a></li>
+   </ul>
+
+   <h3>Contact</h3>
+   <ul>
+      <li><a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x41;&#x6e;&#x64;&#x72;&#x65;&#x61;&#x73;%20&#x45;&#x6e;&#x67;&#x65;&#x6c;%20%3c&#x70;&#x72;&#x6f;&#x6a;&#x65;&#x63;&#x74;&#x73;&#x40;&#x6e;&#x65;&#x73;&#x72;&#x61;&#x64;&#x61;&#x2e;&#x64;&#x65;%3e">E-Mail</a></li>
+   </ul>
+
+</div>
+
+<div id="content">
+   <h2 id="manual">Manual</h2>
+
+<h3 id="quick-start">Quick Start</h3>
+
+<p>Start recording, 5min interval, temperature and humidity:</p>
+
+<pre><code>./tfd128 --start
+</code></pre>
+
+<p>Start recording, 5min interval, temperature only:</p>
+
+<pre><code>./tfd128 --start --interval 5 --mode t
+</code></pre>
+
+<p>Start recording, 1min interval, temperature and humidity:</p>
+
+<pre><code>./tfd128 --start --interval 1 --mode th
+</code></pre>
+
+<p>Stop recording:</p>
+
+<pre><code>./tfd128 --stop
+</code></pre>
+
+<p>Write recorded data points to a file, using the time and date format of the
+current locale. The filename will be automatically determined from the
+recorded data:</p>
+
+<pre><code>./tfd128 --dump-values --time-fmt "%c"
+</code></pre>
+
+<p>Write recorded data points to file <code>data.txt</code>, using the default date/time
+format, but change the data format to <code>&lt;date&gt;&lt;tab&gt;&lt;temperature&gt;&lt;tab&gt;&lt;humidity&gt;</code>
+instead of the original csv format (which is <code>%c;%d;%t;%h</code>):</p>
+
+<pre><code>./tfd128 --dump-values --output data.txt --data-fmt="%d\t%t\t%h"
+</code></pre>
+
+</div>
+
+<div id="footer">
+Copyright &copy; 2007-2020 Andreas Engel - Last page change: 2020-03-21
+</div>
+
+</body>
+</html>
